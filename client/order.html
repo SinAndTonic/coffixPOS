@@ -1,0 +1,43 @@
+<template name="newOrder">
+<div class="container">
+<div class="row">
+		<div class="col-md-5">
+			<h1>New Order</h1>
+				{{#autoForm collection="Orders" type="insert" id="newOrderForm"}}
+		<div>
+			{{> afQuickField name='price' options=size type='select-radio' template='buttonGroup'}}
+			{{> afQuickField name='type' options=type type='select-radio' template='buttonGroup'}}
+			{{> afQuickField name='milk' options=milk type='select-radio' template='buttonGroup'}}
+			{{> afQuickField name='extras' options=extras type='select-checkbox' template='buttonGroup'}}
+		</div>
+
+			<button type="submit" class="btn btn-primary">Add to Order</button>
+
+				{{/autoForm}}
+
+
+
+		</div>
+
+
+<div class="col-md-7">
+{{> currentOrder}}
+</div>
+</div>
+</div>
+</template>
+
+<template name="currentOrder">
+<h1>Current Order</h1>
+	<table class='table'>
+		<thead>
+		<tr><th>Price</th><th>Type</th><th>Milk</th><th>Extras</th></tr>
+	</thead>
+		<tbody>	
+			{{#each currentO}}
+				<tr><td>{{prices}}</td><td>{{type}}</td><td>{{milk}}</td><td>{{#each extras}}<li> {{this}}</li> {{/each}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+			{{/each}}
+		</tbody>
+	</table>
+	{{totalPrice}}
+</template>
