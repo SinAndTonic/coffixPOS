@@ -8,19 +8,19 @@ Template.newOrder.helpers({
 	type: function(){
 		return [
 			{label: "Espresso", value: "Espresso"},
-			{label: "Unichem Lynnmall", value: "Unichem Lynnmall"}
+			{label: "Long Black", value: "Long Black"}
 		];
 	},
 	milk: function(){
 		return [
-			{label: "Soy", value: "Soy"},
-			{label: "Unichem Lynnmall", value: "Unichem Lynnmall"}
+			{label: "Regular", value: "Regular"},
+			{label: "Soy", value: "Soy"}
 		];
 	},
 	extras: function(){
 		return [
-			{label: "Hazlenut Syrup", value: "Hazlenut Syrup"},
-			{label: "Unichem Lynnmall", value: "Unichem Lynnmall"}
+			{label: "Hazlenut", value: "Hazlenut"},
+			{label: "Sugar x 1", value: "Sugar x 1"}
 		];
 	}
 });
@@ -32,16 +32,50 @@ Template.currentOrder.helpers({
 	totalPrice: function(){
 		var sum = 0; 
   		Orders.find({}).forEach(function (doc) { sum += doc.price; });
+  		Session.set('totalPrice', sum);
   		return accounting.formatMoney(sum, "$");
 	},
 	prices: function(){
 		amount = this.price;
 		return accounting.formatMoney(amount, "$");
+	},
+	amountPaid: function(){
+		paid = Session.get('paid');
+		return accounting.formatMoney(paid, "$");
+	},
+	difference :function(){
+		amount = Session.get('totalPrice');
+		paid = Session.get('paid');
+		diff = amount - paid;
+		return accounting.formatMoney(diff, "$");
+	},
+	complete: function(){
+		if (Session.get('paid') >= Session.get('totalPrice'))
+			{return true;}
+	},
+	remaining: function(){
+		if (Session.get('paid') >= Session.get('totalPrice'))
+			{return 'Change';}
+		else
+			{return 'Remaining';}
 	}
 });
 
 Template.currentOrder.events({
 	'click .remove' : function(e){
 		Orders.remove(this._id);
+	},
+	'click .complete' : function(e){
+		Session.set('paid',0);
+	}
+});
+
+Template.pay.events({
+	'click .pay' :function(e){
+		clicked = parseFloat(e.target.value, 10);
+		console.log(clicked);
+		paid = parseFloat(Session.get('paid'));
+
+		Session.set('paid', paid + clicked);
 	}
 });

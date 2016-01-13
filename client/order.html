@@ -39,5 +39,31 @@
 			{{/each}}
 		</tbody>
 	</table>
-	{{totalPrice}}
+	<div class='row'>{{> pay}}</div>
+	<h2>Total: {{totalPrice}}</h2> <h2>Paid: {{amountPaid}} </h2> <h2>{{remaining}}: {{difference}}</h2>
+	
+
+	{{#if complete}}
+		<button type="button" class="btn-lg complete btn-success">COMPLETE ORDER</button>
+	{{/if}}
+	
+
+</template>
+
+<template name="pay">
+	<div class="btn-group">
+	  <button type="button" class="btn-lg pay btn-primary" value="100">$100</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="50">$50</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="20">$20</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="10">$10</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="5">$5</button>
+	</div>
+	<br><br>
+	<div class="btn-group">
+	  <button type="button" class="btn-lg pay btn-primary" value="2">$2</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="1">$1</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="0.5">50c</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="0.2">20c</button>
+	  <button type="button" class="btn-lg pay btn-primary" value="0.1">10c</button>
+	</div>
 </template>
