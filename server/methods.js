@@ -4,10 +4,11 @@ Meteor.methods({
   updateAll: function(){
     Orders.update({},{$set:{'complete':true}},{multi:true});
   },
-  incrementId: function(){
-  		setCounter('orderId', 0);
-  	  	return incrementCounter('orderId',1);
-  }
+  incrementId:function(doc) {
+        doc.id = incrementCounter('docId');
+        Counter.insert(doc);
+        return doc.id;
+    }
 });
 }
 
