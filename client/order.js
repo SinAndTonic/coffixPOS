@@ -91,6 +91,8 @@ Template.currentOrder.events({
 	},
 	'click .complete' : function(e){
 		Session.set('paid',0);
+		theId = Meteor.call('incrementId');
+		console.log(theId);
 		Meteor.call('updateAll');
 		
 	}
