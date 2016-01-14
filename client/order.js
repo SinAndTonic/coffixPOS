@@ -22,16 +22,40 @@ Template.newOrder.helpers({
 			{label: "Hazlenut", value: "Hazlenut"},
 			{label: "Sugar x 1", value: "Sugar x 1"}
 		];
+	},
+	multiQty: function(){
+		return Session.get('multi');
 	}
+});
+
+Template.newOrder.events({
+	'click .btn': function(e){
+		
+			if (this.name === 'type')
+			{
+				if ($(e.target).hasClass('active'))
+				{
+					
+					multi = Session.get('multi');
+					multi += 1;
+					Session.set('multi', multi);
+					
+				}
+				else {
+					Session.set('multi',1);
+					}
+				}
+	}
+	
 });
 
 Template.currentOrder.helpers({
 	currentO: function(){
-		return Orders.find();
+		return Orders.find({complete: false});
 	},
 	totalPrice: function(){
 		var sum = 0; 
-  		Orders.find({}).forEach(function (doc) { sum += doc.price; });
+  		Orders.find({complete: false}).forEach(function (doc) { sum += doc.price; });
   		Session.set('totalPrice', sum);
   		return accounting.formatMoney(sum, "$");
 	},
@@ -50,7 +74,7 @@ Template.currentOrder.helpers({
 		return accounting.formatMoney(diff, "$");
 	},
 	complete: function(){
-		if (Session.get('paid') >= Session.get('totalPrice'))
+		if (Session.get('paid') >= Session.get('totalPrice') && Session.get('paid') !== 0)
 			{return true;}
 	},
 	remaining: function(){
@@ -67,6 +91,8 @@ Template.currentOrder.events({
 	},
 	'click .complete' : function(e){
 		Session.set('paid',0);
+		Meteor.call('updateAll');
+		
 	}
 });
 

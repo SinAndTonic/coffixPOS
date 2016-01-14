@@ -6,7 +6,13 @@
 				{{#autoForm collection="Orders" type="insert" id="newOrderForm"}}
 		<div>
 			{{> afQuickField name='price' options=size type='select-radio' template='buttonGroup'}}
-			{{> afQuickField name='type' options=type type='select-radio' template='buttonGroup'}}
+			<div style="float:right">X {{multiQty}}</div>
+		<!-- 	{{#each afFieldNames name='type'}}
+			    {{> afQuickField name=this.name options=type}}
+			{{/each}} -->
+
+			{{> afQuickField name='type' options=type type='select-radio' template='buttonGroup' class='type'}}
+			
 			{{> afQuickField name='milk' options=milk type='select-radio' template='buttonGroup'}}
 			{{> afQuickField name='extras' options=extras type='select-checkbox' template='buttonGroup'}}
 		</div>
@@ -35,7 +41,7 @@
 	</thead>
 		<tbody>	
 			{{#each currentO}}
-				<tr><td>{{prices}}</td><td>{{type}}</td><td>{{milk}}</td><td>{{#each extras}}<li> {{this}}</li> {{/each}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+				<tr><td>{{prices}}</td><td>{{type}} x {{multi}}</td><td>{{milk}}</td><td>{{#each extras}}<li> {{this}}</li> {{/each}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
 			{{/each}}
 		</tbody>
 	</table>
