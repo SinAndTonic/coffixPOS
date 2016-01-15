@@ -2,7 +2,7 @@
 <div class="row">
 		<div class="col-md-5">
 			<h1>New Order</h1>
-				{{#autoForm collection="Orders" type="insert" id="newOrderForm"}}
+				{{#autoForm collection="Orders" id="newOrderForm"}}
 		<div>
 			{{> afQuickField name='price' options=size type='select-radio' template='buttonGroup'}}
 			<div style="float:right">X {{multiQty}}</div>
@@ -39,7 +39,7 @@
 	</thead>
 		<tbody>	
 			{{#each currentO}}
-				<tr><td>{{prices}}</td><td>{{type}} x {{multi}}</td><td>{{milk}}</td><td>{{#each extras}}<li> {{this}}</li> {{/each}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+				<tr><td>{{prices}}</td><td>{{type}} x {{multi}}</td><td>{{milk}}</td><td>{{#each extras}}<li> {{this}}</li> {{/each}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td>{{#if completed}}complete {{else}} not {{/if}}</tr>
 			{{/each}}
 		</tbody>
 	</table>

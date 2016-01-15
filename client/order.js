@@ -51,7 +51,7 @@ Template.newOrder.events({
 
 Template.currentOrder.helpers({
 	currentO: function(){
-		return Orders.find({complete: false});
+		return Orders.find({completed: false});
 	},
 	totalPrice: function(){
 		var sum = 0; 
@@ -91,12 +91,12 @@ Template.currentOrder.events({
 	},
 	'click .complete' : function(e){
 		Session.set('paid',0);
-		Meteor.call('incrementId', function(error,result){
-			if (error)
-				{console.log(error);}
-			else
-				{console.log(result);}
-		});
+		// Meteor.call('incrementId', function(error,result){
+		// 	if (error)
+		// 		{console.log(error);}
+		// 	else
+		// 		{console.log(result);}
+		// });
 		
 		Meteor.call('updateAll');
 		
