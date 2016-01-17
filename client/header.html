@@ -6,7 +6,16 @@
 	    </div>
 	    <ul class="nav navbar-nav">
 	      <li><a href="{{pathFor 'newOrder'}}">Register</a></li>
-	      <li><a href="{{pathFor 'allOrders'}}">Orders</a></li> 
+	      <li><a href="{{pathFor 'allOrders'}}">Orders</a></li>
+	      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Modify
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{{pathFor 'modType'}}">Coffee</a></li>
+          <li><a href="{{pathFor 'modMilk'}}">Milk</a></li>
+          <li><a href="{{pathFor 'modExtras'}}">Extras</a></li> 
+        </ul>
+      </li>
 	    </ul>
 	  </div>
 	</nav>

@@ -1,0 +1,25 @@
+<template name="modify">
+<h1>Modfiy</h1>
+  {{> modType}}
+</template>
+
+<template name="modType">
+
+<h2>Type</h2>
+<table class="table">
+  <thead><th>Name</th><th>Price</th></thead>
+    <tbody>
+      {{#each allTypes}}
+        <tr class="itemRow {{selected}}"><td>{{name}}</td><td>{{price}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+      {{/each}}
+    </tbody>
+</table>
+	{{#autoForm id="modifyType" type=formType collection='Type' doc=selectedPersonDoc autosave=autoSaveMode}}
+  {{> afQuickField name="name"}}
+  {{#unless autoSaveMode}}
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
+  </div>
+  {{/unless}}
+{{/autoForm}}
+</template>

@@ -6,10 +6,10 @@ Template.newOrder.helpers({
 		];
 	},
 	type: function(){
-		return [
-			{label: "Espresso", value: "Espresso"},
-			{label: "Long Black", value: "Long Black"}
-		];
+		return Type.find().map(function (c) {
+			return {label: c.name, value: c.name};
+		});
+		
 	},
 	milk: function(){
 		return [
