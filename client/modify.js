@@ -1,8 +1,28 @@
+Template.modify.helpers({
+  temp: function() {
+
+    return "modType";
+  }
+});
+
+Template.modify.events({
+  
+  'click .tab': function(e) {
+    // current = e.currentTarget.name;
+    // //console.log(current);
+    // Session.set("selectedTab", e);
+    // console.log(Session.get("selectedTab"));
+    //console.log(e);
+  }
+
+});
+
 Template.modType.helpers({
   autoSaveMode: function () {
     return Session.get("autoSaveMode") ? true : false;
   },
   selectedPersonDoc: function () {
+    
     return Type.findOne(Session.get("selectedPersonId"));
   },
   isSelectedPerson: function () {
@@ -20,6 +40,8 @@ Template.modType.helpers({
   },
   allTypes: function() {
     return Type.find();
+    
+    
   },
   selected: function(){
     if (this._id === Session.get('selectedPersonId'))
@@ -35,9 +57,12 @@ Template.modType.events({
     Session.set("autoSaveMode", !Session.get("autoSaveMode"));
   },
   'click .remove': function(e) {
-    console.log(this);
-    theCollection = this.collection.name;
-    theId = this._id;
-    theCollection.remove({_id: theId});
+    toRemove = Session.get("selectedPersonId");
+    Type.remove(toRemove);
+  },
+  'click .addNew': function(e) {
+    Type.insert({
+      name: "New Item"
+    });
   }
 });

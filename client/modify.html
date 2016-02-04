@@ -1,5 +1,12 @@
 <template name="modify">
 <h1>Modfiy</h1>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#" class="tab" name="Type" aria-controls="home" role="tab" data-toggle="tab">Coffee</a></li>
+    <li role="presentation"><a href="#" class="tab" name="Milk" aria-controls="profile" role="tab" data-toggle="tab">Milk</a></li>
+    <li role="presentation"><a href="#" class="tab" name="Extras" aria-controls="messages" role="tab" data-toggle="tab">Extras</a></li>
+</ul>
+
   {{> modType}}
 </template>
 
@@ -10,7 +17,7 @@
   <thead><th>Name</th><th>Price</th></thead>
     <tbody>
       {{#each allTypes}}
-        <tr class="itemRow {{selected}}"><td>{{name}}</td><td>{{price}}</td><td><button class="remove"><span class="glyphicon glyphicon-remove"></span></button></td></tr>
+        <tr class="itemRow {{selected}}"><td>{{name}}</td><td>{{price}}</td></tr>
       {{/each}}
     </tbody>
 </table>
@@ -19,6 +26,8 @@
   {{#unless autoSaveMode}}
   <div class="form-group">
     <button type="submit" class="btn btn-primary" disabled="{{disableButtons}}">Submit</button>
+    <button class="btn btn-success addNew">Add New</button>
+    <button class="btn btn-danger remove" disabled="{{disabledButtons}}">Remove</button>
   </div>
   {{/unless}}
 {{/autoForm}}

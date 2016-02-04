@@ -2,6 +2,7 @@ AutoForm.hooks({
   newOrderForm: {
 
     onSubmit: function (insertDoc, updateDoc, currentDoc) {
+            insertDoc.multi = Session.get('multi');
             Orders.insert(insertDoc);
             this.done();
             console.log('submited');

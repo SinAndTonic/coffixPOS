@@ -98,6 +98,25 @@ Template.currentOrder.events({
 		// 		{console.log(result);}
 		// });
 		
+		var currentOrder = Orders.find({completed: false}).fetch();
+
+		console.log(currentOrder);
+
+		var sock = new WebSocket('ws://localhost:9999');
+
+		sock.onopen = function(){
+		    sock.send(currentOrder);
+		};
+		sock.onclose = function(){
+		    console.log("Connection Closed");
+		};
+		sock.onerror = function(evt){
+		    console.log("The following error occurred: " + evt.data);
+		};
+		sock.onmessage = function(evt){
+		    console.log("The following data was received:" + evt.data);
+		};
+
 		Meteor.call('updateAll');
 		
 	}
