@@ -1,0 +1,24 @@
+<template name="index">
+ <!--  <ul class="nav nav-pills">
+    <li data-template="type" role="presentation" class="active"><a href="#">Type</a></li>
+    <li data-template="milk" role="presentation"><a href="#">Milk</a></li>
+    <li data-template="extras" role="presentation"><a href="#">Extras</a></li>
+  </ul> -->
+
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#" class="tab" name="Type" data-template="type" aria-controls="home" role="tab" data-toggle="tab">Coffee</a></li>
+    <li role="presentation"><a href="#" class="tab" name="Milk" data-template="milk" aria-controls="profile" role="tab" data-toggle="tab">Milk</a></li>
+    <li role="presentation"><a href="#" class="tab" name="Extras" data-template="extras" aria-controls="messages" role="tab" data-toggle="tab">Extras</a></li>
+</ul>
+  {{> Template.dynamic template="content" data=tabData}}
+</template>
+
+<template name="content">
+  <h3 class="page-header" style="text-transform: capitalize;">{{this.contentType}}</h3>
+
+  <ul class="list-group">
+    {{#each this.items}}
+      <li class="list-group-item"><strong>{{name}}</strong></li>
+    {{/each}}
+  </ul>
+</template>
